@@ -18,7 +18,7 @@ int main()
 	cin >> size;
 	int* arr1 = new int[size];
 	int* arr2 = new int[size];
-	string path = "D:\\who\\r.txt";
+	string path = "c:\\sourse\\input.txt";
 	ifstream fin;
 	fin.open(path);
 	if (!fin.is_open()) cout << "Ошибка открытия файла\n";
@@ -68,7 +68,6 @@ int main()
 }
 
 
-}
 
 
 
