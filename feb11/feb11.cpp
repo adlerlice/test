@@ -9,7 +9,7 @@ void first_show(int* const arr1, int const length);
 void odd_sort(int* const arr1, int* const arr2, int const length, int& key);
 void bubble_sort(int*& arr2, int const length);
 void second_show(int* const arr2, int const length, int& key);
-void deletek(int* arr, int& length, int const k);
+void delete_k(int* arr, int& length, int const k);
 int prompt_menu_item();
 int main()
 {
@@ -23,12 +23,12 @@ int main()
 	int variant = prompt_menu_item();
 	switch (variant) {
 	case 1:
-		fillarrws(arr1, arr2, length);
-		first_show(arr1, length);
+		fillarrws(arr1, arr2, length); //Заполняем массив
+		first_show(arr1, length); //Первично выводим массив на экран
 		cout << endl;
-		odd_sort(arr1, arr2, length, key);
-		bubble_sort(arr2, length);
-		second_show(arr2, length, key);
+		odd_sort(arr1, arr2, length, key); //Проверяем элементы массива на нечётность и копируем в новый массив
+		bubble_sort(arr2, length); //Сортируем новый массив
+		second_show(arr2, length, key); //Выводим отсортированный массив
 		delete[]arr;
 		delete[]arr1;
 		delete[]arr2;
@@ -39,13 +39,13 @@ int main()
 		cin >> a;
 		cin >> b;
 		cin >> k;
-		fillarr(arr, length, a, b);
+		fillarr(arr, length, a, b);//Заполняем массив
 		cout << "Первоначальный массив:\n";
-		showarr(arr, length);
+		showarr(arr, length);//Выводим массив на экран
 		cout << "Введите число, которое хотите удалить\n";
-		deletek(arr, length, k);
+		delete_k(arr, length, k);//Проверяем массив на число k и удаляем, сжимаем массив
 		cout << endl;
-		showarr(arr, length);
+		showarr(arr, length);//Выводим массив на экран
 		delete[]arr;
 		delete[]arr1;
 		delete[]arr2;
@@ -59,8 +59,12 @@ int main()
 }
 void fillarrws(int* const arr1, int* const arr2, int const length)
 {
-	string path = "D:\\who\\r.txt";
+	string path = "D:\\moa-195\\yaziki_progi\\2 семак\\input.txt";
 	ifstream fin;
+
+	/*fin построчно из файла выбирает элементы в массив
+
+	и записывает их*/
 	fin.open(path);
 	if (!fin.is_open()) cout << "Ошибка открытия файла\n";
 	else cout << "Файл открыт\n";
@@ -69,7 +73,7 @@ void fillarrws(int* const arr1, int* const arr2, int const length)
 		fin >> arr1[i];
 		fin >> arr2[i];
 	}
-	fin.close();
+	fin.close();//закрывает файл
 
 }
 void first_show(int* const arr1, int const length)
@@ -93,11 +97,13 @@ void odd_sort(int* const arr1, int* const arr2, int const length, int& key)
 		}
 
 	}
+	/*
 	cout << endl;
 	for (size_t i = 0; i < length; i++)
 	{
 		cout << arr2[i] << " ";
 	}
+	*/
 }
 
 void bubble_sort(int*& arr2, int const length)
@@ -118,6 +124,7 @@ void bubble_sort(int*& arr2, int const length)
 void second_show(int* const arr2, int const length, int& key)
 {
 	cout << endl;
+	cout << key;
 	for (size_t i = 0; i < key; i++)
 	{
 		cout << arr2[i] << " ";
@@ -126,12 +133,11 @@ void second_show(int* const arr2, int const length, int& key)
 }
 int prompt_menu_item()
 {
-	// Выбранный вариант менюж
+	// Выбранный вариант меню
 	int variant;
 	cout << "Выберите вариант\n" << endl;
 	cout << "1. Сформировать динамический одномерный массив \n"
-		<< "2. Заполнить динамический массив\n"
-		<< "3. выйти\n" << endl;
+		<< "2. Заполнить динамический массив\n" << endl;
 	cout << ">>> ";
 	cin >> variant;
 	return variant;
@@ -143,7 +149,7 @@ void fillarr(int* const arr, int const length, int a, int b)
 		arr[i] = rand() % a - b;
 	}
 }
-void deletek(int* arr, int& length, int const k)
+void delete_k(int* arr, int& length, int const k)
 {
 	int h;
 	for (size_t i = 0; i < length; i++)
