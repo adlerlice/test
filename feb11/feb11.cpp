@@ -2,7 +2,6 @@
 
 #include "cstdlib"
 
-#include"ctime"
 
 #include "fstream"
 
