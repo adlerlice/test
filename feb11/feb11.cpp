@@ -1,252 +1,100 @@
-﻿#include"iostream"
-
-#include "cstdlib"
-
-
-#include "fstream"
-
+﻿#include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
 using namespace std;
-
-void fillarr(int* const arr, int const length, int a, int b);
-
-void showarr(int* const arr, int const length);
-
-void deletek(int* arr, int& length, int const k);
-
-void check(int& n);
-
-void check(int& n)//количество чисел в файле
-
-{
-
-	int value;
-
-	string path = "D:\\moa-195\\yaziki_progi\\2_sem\\input.txt";
-
-	ifstream F;
-
-	F.open(path);//открываем файл для чтения
-
-	if (F.is_open())
-
-	{
-
-		F >> value;
-
-		while (!F.eof())//проверяем, достигнут ли конец файла
-
-		{
-
-			F >> value;//считываем значение из файла
-
-			if (value % 2 != 0)
-
-				n++;
-
-		}
-
-		cout << "Количество нечетных чисел в файле:" << n << endl;
-
-	}
-
-	F.close();
-
-}
-
+void MENU();
+void RESULTS(int** n, int* n1, int a, int b);
+void WINNERS(int* n, int a);
 int main()
-
 {
-
-	cout << "1)" << endl;
-
-	setlocale(LC_ALL, "russian");
-
-	int n = 0, i = 0, t;
-
-	check(n);
-
-	int* a = new int[n];
-
-	string path = "D:\\moa-195\\yaziki_progi\\2_sem\\input.txt";
-
-	ifstream F;
-
-	F.open(path);
-
-	if (!F.is_open())
-
-	{
-
-		cout << "Ошибка открытия файла\n";
-
-	}
-
-	else
-
-	{
-
-		cout << "Файл открыт\n";
-
-	}
-
-	while (!F.eof())
-
-	{
-
-		F >> t;//считываем
-
-		if (t % 2 != 0) {
-
-			a[i] = t;
-
-			i++;
-
-		}
-
-	}
-
-	cout << endl;
-
-	F.close();
-
-	//упорядочить по убыванию
-
-	for (int i = 0; i < n - 1; i++)
-
-	{
-
-		for (int j = 0; j < n - i - 1; j++)
-
+	int n, m, key = 1;
+	MENU();
+	cout << endl << ":"; cin >> key;
+	srand(time(NULL));
+	do
+		switch (key)
 		{
-
-			if (a[j] < a[j + 1]) {
-
-				// меняем элементы местами
-
-				int temp = a[j];
-
-				a[j] = a[j + 1];
-
-				a[j + 1] = temp;
-
-			}
-
+		case 1:
+			n = rand() % 31;
+			m = rand() % 11;
+			break;
+		case 2:
+			cout << "Enter n and m\n";
+			cin >> n;
+			cin >> m;
+			break;
+		case 0:
+			cout << "Goodbye! See you soon!\n";
+			break;
+		default:
+			cout << "ERROR!\n";
+			break;
 		}
-
-	}
-
-	cout << "Массив из нечетных чисел: ";
-
+	while (n == 0 || m == 0 || n == 1 || m == 1);
+	cout << "number of shooters:" << n << "\nnumber of shots:" << m << "\n";
+	int** a;
+	a = new int* [n];
 	for (int i = 0; i < n; i++)
-
+		a[i] = new int[m];
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			a[i][j] = rand() % 11;
+	for (int i = 0; i < n; i++)
 	{
-
-		if (a[i] % 2 != 0)
-
+		for (int j = 0; j < m; j++)
 		{
-
-			cout << a[i] << " ";
-
+			printf("%5d", a[i][j]);
 		}
-
+		cout << endl;
 	}
-
-	cout << endl;
-
-	cout << "2)" << endl;
-
-	int A, b, k, length;
-
-	cout << "\nВведите размерность массива:\n";
-
-	cin >> length;
-
-	int* arr = new int[length];
-
-	cout << "Введите диапазон чисел рандома от a до b\n";
-
-	cin >> A;
-
-	cin >> b;
-
-	fillarr(arr, length, A, b);
-
-	cout << "Первоначальный массив:\n";
-
-	showarr(arr, length);
-
-	cout << "\nВведите число, которое хотите удалить\n";
-
-	cin >> k;
-
-	deletek(arr, length, k);
-
-	cout << endl;
-
-	showarr(arr, length);
-
-	delete[]arr;
-
+	int* res;
+	res = new int[n];
+	RESULTS(a, res, n, m);
+	WINNERS(res, n);
 	return 0;
-
 }
 
-void fillarr(int* const arr, int const length, int a, int b)
-
+void MENU()
 {
+	cout << "\t!HELLO THERE!\n";
+	cout << "Choose, how the program will work:\n";
+	cout << endl;
+	cout << "1 - random filling\n";
+	cout << "2 - manual filling\n";
+	cout << "0 - exit\n";
+}
 
-	for (size_t i = 0; i < length; i++)
-
+void RESULTS(int** n, int* n1, int a, int b)
+{
+	int s;
+	for (int i = 0; i < a; i++)
 	{
-
-		arr[i] = rand() % a - b;
-
+		s = 0;
+		for (int j = 0; j < b; j++)
+			s += n[i][j];
+		n1[i] = s;
 	}
-
+	cout << "\nResults: ";
+	for (int i = 0; i < a; i++)
+		cout << n1[i] << " ";
 }
 
-void deletek(int* arr, int& length, int const k)
-
+void WINNERS(int* n, int a)
 {
-
-	int h;
-
-	for (size_t i = 0; i < length; i++)
-
+	int max, maxI;
+	max = n[0];
+	for (int i = 0; i < a; i++)
 	{
-
-		while (arr[i] == k)
-
+		if (n[i] > max)
+			max = n[i];
+	}
+	cout << "\n" << max << "\nWINNERS:\n";
+	for (int i = 0; i < a; i++)
+	{
+		if (n[i] == max)
 		{
-
-			h = i;
-
-			for (size_t i = h; i < length; i++)
-
-			{
-
-				arr[i] = arr[i + 1];
-
-			}
-
-			--length;
-
+			cout << "Shooter number " << i + 1 << endl;
 		}
-
 	}
-
-}
-
-void showarr(int* const arr, int const length)
-
-{
-
-	for (size_t i = 0; i < length; i++)
-
-	{
-
-		cout << arr[i] << " ";
-
-	}
-
 }
