@@ -262,7 +262,7 @@ namespace second_task
 	}
 	void input_file(int** arr_A, int** arr_C, int* vec_B, int* vec_D, int m, int n)
 	{
-		std::string way = "D:\\who\\r.txt";
+		std::string way = "D:\\moa-195\\yaziki_progi\\2_sem\\input.txt";
 		std::ifstream file_in;
 		file_in.open(way);
 		//arr_A
