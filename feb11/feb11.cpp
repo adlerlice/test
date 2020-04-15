@@ -1,4 +1,9 @@
-﻿#include <iostream>
+﻿/*Настали тяжелые времена. Мир опустился во мрак, казалось бы самого страшного развития событий. 
+В те времена у людей не было ни веры, ни надежды на успешное завершение всех усилий, что были потрачены в течении такого длительного срока.
+Казалось, что испытания были настолько суровы, что скромные доспехи, состоящии из одной прочитанной статьи на хабре и учебника по С++, в которые был облачен автор, в момент начала этой удивительной итории - точно не смогут спасти его и удержать от самого крупного сражения в его жизни, от которого зависела бы его судьба.
+
+*/
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <cstdlib>
@@ -8,33 +13,33 @@
 #include <Windows.h>
 using::std::cout;
 using::std::cin;
-namespace shooters_task
+namespace shooters_task//тут лежат все функции, которые участвует в состязании по стрельбе:)
 {
-	void results(int** n, int* n1, int a, int b)
+	void results(int** n, int* n1, int a, int b)//эта штука выводит результаты, подсчитывая сумму всех выстрелов
 	{
 		int s;
-		for (int i = 0; i < a; i++)
+		for (int i = 0; i < a; i++)//цикл, который заполняет массив n1 результатами
 		{
 			s = 0;
-			for (int j = 0; j < b; j++)
+			for (int j = 0; j < b; j++)//цикл, который заполняет массив n1 результатами
 				s += n[i][j];
 			n1[i] = s;
 		}
 		cout << "\nResults: ";
-		for (int i = 0; i < a; i++)
+		for (int i = 0; i < a; i++)//выводит массив n1 с результами
 			cout << n1[i] << " ";
 	}
-	void winners(int* n, int a)
+	void winners(int* n, int a) //Туть выводится номер виннера
 	{
 		int max, maxI;
-		max = n[0];
-		for (int i = 0; i < a; i++)
+		max = n[0];//номер победителя
+		for (int i = 0; i < a; i++) //проверяет массив на максимальный результат
 		{
 			if (n[i] > max)
 				max = n[i];
 		}
 		cout << "\n" << max << "\nWINNERS:\n";
-		for (int i = 0; i < a; i++)
+		for (int i = 0; i < a; i++) //выводит и проверяет номер стрелка с максимальным результом
 		{
 			if (n[i] == max)
 			{
@@ -44,8 +49,9 @@ namespace shooters_task
 
 	}
 }
-namespace first_task {
-	void enter_values(int& rows, int& cols, int& a, int& b)
+namespace first_task // туть лежат все функции из первого задания в варианте:)
+{
+	void enter_values(int& rows, int& cols, int& a, int& b) //в зал входят значения для рандома и количество строк\колонок
 	{
 		cout << "Левая граница значений = ";
 		cin >> a;
@@ -56,44 +62,46 @@ namespace first_task {
 		cout << "\n";
 		cols = rows;                        //Количество столбиков в матрице
 	}
-	void show_arr(int** arr, int rows, int cols)
+	void show_arr(int** arr, int rows, int cols) // на экран объявляется массивчек
 	{
 		cout << "Матрица:\n";
 
-		for (int i = 0; i < rows; i++)
+		for (int i = 0; i < rows; i++) //"напиши здесь: объявляется массивчек"
 		{
 			arr[i] = new int[cols];
 		}
 	}
-	void fill_arr(int** arr, int rows, int cols, int a, int b)
+	void fill_arr(int** arr, int rows, int cols, int a, int b) //На экран со свитой выходит массивчек и заполняет себя вкусностями(ну, значениями, ну шучу я так, да ладно вам)
 	{
-		for (int i = 0; i < rows; i++)
+		for (int i = 0; i < rows; i++) 
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				arr[i][j] = a + rand() % (b - a + 1);
+				arr[i][j] = a + rand() % (b - a + 1); //МУЗЫКА ГРОМЧЕ ГЛАЗА ЗАКРЫТЫ ЭТО РАНДОМ
 				cout << arr[i][j] << "\t";
 			}
 			cout << std::endl;
 		}
 	}
-	void red_area_analyze(int** arr, int rows)
+	void red_area_analyze(int** arr, int rows) //Это был большой красный зал. А в центре виднелись 2 больших красных треугольника, которые содержали в себе все значения ниже главной диагонали. Это и было целью нашего визита. 
 	{
 		cout << "Ниже главной диагонали:\n";
-		for (int i = 0; i < rows; i++)
-		{
+		//За руку в залу вошли все значения ниже главной диагонали.
+		for (int i = 0; i < rows; i++) 
+		{ 
 			for (int j = 0; j < rows; j++)
 			{
 				if (i >= rows - j)  cout << arr[i][j] << " ";
 			}
 		}
 		cout << std::endl;
-		system("pause");
+		system("pause");//внезапно все замирает, зал погружается в тишину. Все ждали следующего действия.
 	}
-	void red_area_show_element(int** arr, int rows, int& min, int& imin, int& jmin)
+	//Из дальней двери появляется небольшой белый элемент. Существо было причудливое, похожее на пушистое облачко, и заняло свое законное место в этом огромном красном зале.
+	void red_area_show_element(int** arr, int rows, int& min, int& imin, int& jmin) 
 	{
 		cout << "Минимальный положительный элемент: ";
-		for (int i = 0; i < rows; i++)
+		for (int i = 0; i < rows; i++) //Все вокруг внимательно смотрят на него
 		{
 			for (int j = 0; j < rows; j++)
 			{
@@ -101,7 +109,7 @@ namespace first_task {
 				{
 
 
-					if (arr[i][j] > 0)
+					if (arr[i][j] > 0) //каждый посчитал должным, сравнить свою величину с ним, но не нашлось ничего меньшего, чем это таинственное облако
 					{
 						if (arr[i][j] < min)
 						{
@@ -113,33 +121,36 @@ namespace first_task {
 				}
 			}
 		}
-		if (min > 0 && min != INT_MAX)
+		if (min > 0 && min != INT_MAX) //Оставалось последнее испытание. Хватит ли существу массы, чтобы выдержать ношу, что выпала на его долю? 
 		{
+			//Открывается занавес. Таинственное искомое существо появляется на экране
 			cout << min << "\n";; //Вывод минимального положительного числа выше гланой диагонали
 			system("pause");
 		}
 		else {
+			//Пол залы раскалывается, и тьма поглощает его. Всё было зря.
 			cout << "There aren`t positive elements\n";
 		}
 
 	}
-	void green_area_analyze(int** arr, int cols)
+	void green_area_analyze(int** arr, int cols) //В это же время, небольшая группа существ, облаченных в кислотно зеленые тона таинственно перешептывались
 	{
 		cout << "Выше побочной и главной:\n";
 
-		for (int i = 0; i < cols; i++)
+		for (int i = 0; i < cols; i++) // Надменно развернувшись, они проникают сквозь черный занавес, выходя на экран, словно призраки, пришедшие из таинственного будущего
 			for (int j = i + 1; j < cols - i - 1; j++)
 				cout << arr[i][j] << " ";
 	}
-	void green_area_show_element(int** arr, int cols, int a, int& max, int& imax, int& jmax)
+	//Среди присутствующих пробежал таинственный слабый шопот. Резко похолодало, как будто на комнату раньше положенного срока опустилась ночь. Приглушенное освещение стало ещё тише и слабее, все положительное оставалось за гранью черты, что возникла, казалось бы, изнеоткуда.
+	void green_area_show_element(int** arr, int cols, int a, int& max, int& imax, int& jmax) 
 	{
 		cout << "Максимальный отрицательный: ";
 
-		for (int i = 0; i < cols; i++)
+		for (int i = 0; i < cols; i++) //все присутсующие в зеленой зоне оказались по двум берегам, разделенные и расставленные.
 			for (int j = i + 1; j < cols - i - 1; j++)
 				if (arr[i][j] < 0)
 				{
-					if (arr[i][j] > max)
+					if (arr[i][j] > max) //и только у того, в ком остались ещё хоть какие-то стремления к теплому, положительному есть шанс, чтобы спастись и остаться в живых.
 					{
 
 						max = arr[i][j];
@@ -147,7 +158,8 @@ namespace first_task {
 						jmax = j;
 					}
 				}
-		if (max < 0 && max != a) {
+		if (max < 0 && max != a) // его искали, представляя идеалом, но никто понятия не имел, кто он и как выглядит... Миссия затягивалась, а в это время, судьба несчастного автора этой лабы была под угрозой, ведь если бы он так и не смог найти искомое - ему грозило бы сразиться с самым страшным зверем - собственным страхом.
+		{
 			cout << max << "\n";; //Вывод максимального отрицательного
 
 		}
@@ -155,16 +167,16 @@ namespace first_task {
 			cout << "Отрицательных нету\n";
 
 		}
-		system("pause");
+		system("pause"); //атмосфера была крайне напряжена. Никто не мог предугадать, что будет дальше.
 	}
-	void modification(int** arr, int cols, int a, int max, int min, int jmax, int imax, int imin, int jmin, int rows)
+	void modification(int** arr, int cols, int a, int max, int min, int jmax, int imax, int imin, int jmin, int rows) //На экране было два трона, и два народа, чья судьба решалась в режиме реального времени. Сражение, обещало быть долгим и кровавым, но...
 	{
 		if (max < 0 && max != a && min > 0 && min != INT_MAX) {
 			cout << "Новая матрица: \n";
-			int extra;
+			int extra; 
 			extra = arr[imin][jmin];
 			arr[imin][jmin] = arr[imax][jmax];
-			arr[imax][jmax] = extra;
+			arr[imax][jmax] = extra; //Бой был парирован, и в качестве примерения, две абсолютные противоположности - обменялись своими подданными, для того чтобы лучше понять позицию друг друга. Именно так и решаются дела в этом жестоком взрослом мире.
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < cols; j++)
@@ -175,20 +187,21 @@ namespace first_task {
 				cout << std::endl;
 			}
 		}
-		else if (max >= 0 || max == a)
+		else if (max >= 0 || max == a) //Но что будет, если вселенная не совершенна? И каждому положительному, не соответствует отрицательное значение, для заключения мира?
 		{
 			cout << "Нету отрицательных значений для реализации";
 		}
-		else if (min <= 0 || min == INT_MAX)
+		else if (min <= 0 || min == INT_MAX) // Или же наоборот?
 		{
 			cout << "Нету положительных значений для реализации";
 		}
-		else
+		else //А может вселенная достигла самого совершенного из своих обличий?
 		{
 			cout << "Нету как отрицательных, так и положительных значений";
 		}
+		//Нам никогда никогда этого не узнать. Но такова жизнь и с этим, увы, ничего не поделаешь.
 	}
-	void show_test_variables()
+	void show_test_variables() //Мы видели эту историю в трех разных сюжетных линиях. И поверь на слово, дорогой читатель, это стоит того.
 	{
 		cout << "\n\t\t\t\t\tТестовые значения:\n"
 			<< "\t\t\t\t\t\ a = -40, b = 40, rows = 4\n"
@@ -196,9 +209,9 @@ namespace first_task {
 			<< "\t\t\t\t\t\ a = -40, b = 20, rows = 5\n";
 	}
 }
-namespace menu
+namespace menu //Священный список гласил: чтобы избежать кары небесной, необходимо пройти множество самых тяжелых испытаний, из тех, что мы могли представить. Но священный список не говорил, что порядок соблюдать обязательно. 
 {
-	void all_menu()
+	void all_menu() //Ни одно из этих испытаний не легче другого. Но у тебя, читатель, есть выбор, по какой дороге пройти первой.
 	{
 		cout << "1. Задания варианта (Вариант 11)\n"
 			<< "2. Состязания по стрельбе\n"
@@ -208,7 +221,7 @@ namespace menu
 			<< "0 - Выход\n"
 			<< ">>> ";
 	}
-	void variant_menu()
+	void variant_menu()// но не удивляйся, если в некоторых дорогах будут ответвления
 	{
 		cout << "Вариант 11\n"
 			<< "1. Первое задание\n"
@@ -216,7 +229,7 @@ namespace menu
 			<< "0 - Выход\n"
 			<< ">>> ";
 	}
-	void shooters_menu()
+	void shooters_menu()//Они будут казаться приветливыми и дружелюбными, но это только до того момента, пока ты не выпустишь свои священные тест-кейсы, что захотят сломать их и понять устройство. 
 	{
 		cout << "\t!Приветствую в состязании!\n";
 		cout << "Есть только два выбора:\n";
@@ -226,7 +239,7 @@ namespace menu
 		cout << "0 - Выход\n";
 
 	}
-	void gl_menu()
+	void gl_menu() //А некоторые даже попытаются отнять твою жизнь
 	{
 		cout << "\t!Приветствую в игра-жизнь!\n";
 		cout << "Есть только два выбора:\n";
@@ -237,15 +250,17 @@ namespace menu
 
 	}
 }
-namespace second_task
+namespace second_task //Автору хотелось верить, что на этом его муки и страдания были бы окончены, но жизнь уготовила ему новые испытания, с которыми он долго не мог справится.
 {
-	void input_size(int& n, int& m)
+
+	//в этом саду росло всего два дерева. Плоды одного могли исцелить просящего от любых болезней, плоды другого же дарили иммунитет ко всем заразам, что в те далекие времена стали встречаться все чаще
+	void input_size(int& n, int& m) 
 	{
 		cout << "Введите m:\n"; cin >> m;
 		cout << "Введите n:\n"; cin >> n;
 		cout << std::endl;
 	}
-	void arr_decl(int** arr_A, int** arr_C, int m, int n)
+	void arr_decl(int** arr_A, int** arr_C, int m, int n) //каждую весну деревья расцветали и плоды появлялись по всей кроне, куда бы ни упал человеческий взгляд
 	{
 		//arr_A
 		for (int i = 0; i < m; i++)
@@ -257,17 +272,17 @@ namespace second_task
 		{
 			arr_C[i] = new int[n];
 		}
-		//New
+		
 
 	}
-	void input_file(int** arr_A, int** arr_C, int* vec_B, int* vec_D, int m, int n)
+	void input_file(int** arr_A, int** arr_C, int* vec_B, int* vec_D, int m, int n) //в их генетическом коде были прописаны значения, благодаря которым, по непонятным наукам причинам их плоды стали настоящим чудом для человечества
 	{
 		std::string way = "D:\\moa-195\\yaziki_progi\\2_sem\\input.txt";
 		std::ifstream file_in;
 		file_in.open(way);
 		//arr_A
 		cout << "A(m,m):\n\n";
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < m; i++) //это не могло не удивлять. По началу люди думали, что это просто сбой в матрице, но когда это стало происходить каждый год - перед наукой возникли новые задачи.
 		{
 			for (int j = 0; j < m; j++)
 			{
@@ -293,7 +308,7 @@ namespace second_task
 		cout << std::endl;
 		//vec_B
 		cout << "B(m):\n\n";
-		for (int i = 0; i < m; i++)
+		for (int i = 0; i < m; i++) //Привыкнув, людям стало мало этого чуда, и они решили, что пришло время проявить все имеющиеся навыки и создать ещё более мощную версию, чем простое лечение всех болезней. Люди хотели предугадывать их.
 		{
 			file_in >> vec_B[i];
 			cout << vec_B[i] << " ";
@@ -302,7 +317,7 @@ namespace second_task
 		cout << std::endl;
 		//vec_D
 		cout << "D(n):\n\n";
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++) //А может быть даже убивать их в других....
 		{
 			file_in >> vec_D[i];
 			cout << vec_D[i] << " ";
@@ -310,7 +325,7 @@ namespace second_task
 		system("pause");
 		cout << std::endl;
 	}
-	void transp_vec_B(int* vec_B, int* t_vec_B, int& n, int& m)
+	void transp_vec_B(int* vec_B, int* t_vec_B, int& n, int& m) //Для этого ученые вытащили генетический код из плодов первого дерева и перевернули его. Записав в таком виде, у них появилась возможность внедрять новшества, которых они хотели добиться.
 	{
 		cout << "\nТранспонированный vec_B(m)\n";
 		cout << std::endl;
@@ -322,7 +337,7 @@ namespace second_task
 		}
 		cout << std::endl;
 	}
-	void BxDxC(int** arr_C, int* tt_vec_B, int* New, int n, int m)
+	void BxDxC(int** arr_C, int* tt_vec_B, int* New, int n, int m)// На свой страх и риск, люди скрестили все полученные данные, умоляя небеса, чтобы задумка была осуществимой
 	{
 		for (int i = 0; i < n; i++)
 		{
@@ -336,7 +351,7 @@ namespace second_task
 		for (int i = 0; i < m; i++) cout << New[i] << std::endl;
 		system("pause");
 	}
-	void B_x_two(int* t_vec_B, int* tt_vec_B, int n, int m)
+	void B_x_two(int* t_vec_B, int* tt_vec_B, int n, int m) //И даже попытались в два раза увеличить действие уже имеющихся способностей
 	{
 		cout << "Умножение Bx2:\n";
 		for (int i = 0; i < m; i++)
@@ -351,7 +366,7 @@ namespace second_task
 
 		system("pause");
 	}
-	void BxDt(int* tt_vec_B, int* vec_D, int* New_1, int n, int m)
+	void BxDt(int* tt_vec_B, int* vec_D, int* New_1, int n, int m) // Они перепробовали самые разные варианты улучшения, и теперь представляют лучшие из них
 	{
 		for (int i = 0; i < n; i++)
 		{
@@ -363,19 +378,13 @@ namespace second_task
 		for (int i = 0; i < m; i++) cout << New_1[i] << std::endl;
 		system("pause");
 	}
-	/*
-	void subtraction(int** arr_A, int* New, int n, int m)
-	{
-		int* rez = new int[n];
-		for (int i = 0; i < n; ++i)
-			rez[i] = arr_A[i] + New[i];
-		for (int i = 0; i < m; i++) cout << New[i] << std::endl;
-		cout << std::endl;
-	}
-	*/
+	
 }
-namespace game_life_task
+
+//Это была странная вселенная. Проблемой существ в них - было сплошное одиночество. Оставаясь один - ты вынужден был умереть.
+namespace game_life_task //Добро пожаловать, это игра в жизнь. Попробуй выжить. 
 {
+	//Выходя на улицу, вы попадаете на площадь, где каждое мгновение исчезают люди. Повсюду шум и крик, ведь остаться одному хоть на мгновение - значит совершить самоубийство.
 	void fieldView(int** a, int n, int m) //вывод поля
 	{
 		for (int i = 0; i < n; i++)
@@ -391,7 +400,7 @@ namespace game_life_task
 			cout << std::endl;
 		}
 	}
-
+	//На экране непрерывно висит счетчик. Тебе жутко повезло, если ты видишь на нем нечетное число. 
 	int livingPoints(int** a, int n, int m) //счет живых точек
 	{
 		int count = 0;
@@ -403,6 +412,7 @@ namespace game_life_task
 	}
 
 	void neighborhood(int nb[][2], int x, int y) //координаты соседей точки
+		//Нийти свое спасение не так просто, как казалось бы. Ты должен обладать умом, силой и скоростью. 
 	{
 		int k = 0;
 		for (int i = x - 1; i <= x + 1; i++)
@@ -417,6 +427,7 @@ namespace game_life_task
 	}
 
 	int amountLivingNB(int** a, int n, int m, int x, int y) //кол-во живых соседей у клетки[x][y]
+		//Ты должен попробовать остаться в живых, ища тех, кто рядом. Интроверту не выжить в этом мире. Будь улыбчивым и дружелюбным, тогда ты сможешь спасти себя.
 	{
 		int count = 0;
 		int nb[8][2];
@@ -437,6 +448,8 @@ namespace game_life_task
 	}
 
 	void NextGen(int** a, int** a1, int n, int m) //следующее поколение точек
+	
+	//Поколения здесь сменяются слишком быстро, как и в целом проходит жизнь. Правительство ведет подсчет выживших.
 	{
 		int livingNB, p;
 		for (int i = 0; i < n; i++)
@@ -468,16 +481,18 @@ namespace game_life_task
 				if (a != a1)
 					return -1;
 		return 0;
+		//Аналитики беспрерывно проводили сравнение с предыдущей секундой, и их данные не могли не нагнетать.
+		//Но мы знаем, что впереди никому из них не суждено жить. Рискни доказать, что это не так. 
 	}
 }
-namespace gauss_task
+namespace gauss_task // тут у нас метод гауса, и автор без вдохновения
 {
-	void sys_cin(float** arr, float* y, int length)
+	void sys_cin(float** arr, float* y, int length)//ввод значений
 	{
 		for (size_t i = 0; i < length; i++)
 		{
 			arr[i] = new float[length];
-			for (size_t j = 0; j < length; j++)
+			for (size_t j = 0; j < length; j++)//вводим кол-во уравнений 
 			{
 				cout << "arr[" << i << "][" << j << "]= ";
 				cin >> arr[i][j];
@@ -490,13 +505,13 @@ namespace gauss_task
 
 		}
 	}
-	void sys_out(float** arr, float* y, int length)
+	void sys_out(float** arr, float* y, int length)//вывод значений
 	{
 		for (int i = 0; i < length; i++)
 		{
 			for (int j = 0; j < length; j++)
 			{
-				cout << arr[i][j] << "*x" << j;
+				cout << arr[i][j] << "*x" << j;//выводим ответ
 				if (j < length - 1)
 					cout << " + ";
 			}
@@ -515,7 +530,7 @@ namespace gauss_task
 		{
 			max = abs(arr[k][k]);
 			index = k;
-			for (int i = k + 1; i < length; i++)
+			for (int i = k + 1; i < length; i++)//метод гаусса использует прямой ход. мы используем приведение к ступенчатому виду.
 			{
 				if (abs(arr[i][k]) > max)
 				{
@@ -541,7 +556,7 @@ namespace gauss_task
 			y[k] = y[index];
 			y[index] = temp;
 
-			for (int i = k; i < length; i++)
+			for (int i = k; i < length; i++)//
 			{
 				float temp = arr[i][k];
 				if (abs(temp) < eps) continue;
@@ -556,7 +571,7 @@ namespace gauss_task
 			k++;
 		}
 
-		for (k = length - 1; k >= 0; k--)
+		for (k = length - 1; k >= 0; k--)//обратный ход
 		{
 			x[k] = y[k];
 			for (int i = 0; i < k; i++)
@@ -567,9 +582,9 @@ namespace gauss_task
 
 
 }
-namespace tictac
+namespace tictac// крестики нолики
 {
-	void pole_view(char** pole) //показывает поле.
+	void pole_view(char** pole) //показывает поле, которое для удобство разделено палками и ограничено 3х3
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -586,7 +601,7 @@ namespace tictac
 		cout << "Выберите клетку\nСтрока:"; cin >> x;
 		cout << "Столбец: "; cin >> y;
 		x--; y--;
-		if (x < 0 || y < 0 || x>2 || y>2 || pole[x][y] != ' ')
+		if (x < 0 || y < 0 || x>2 || y>2 || pole[x][y] != ' ') //если вводятся некорректные условия, такие как 0-0, или числа меньше нуля, или больше трех
 		{
 			cout << "Ошибка\n";
 			player(pole);
@@ -598,23 +613,23 @@ namespace tictac
 	void compuhter(char** pole) //ход компухтера.
 	{
 		int i, j;
-		for (i = 0; i < 3; i++)
+		for (i = 0; i < 3; i++) 
 		{
 			for (j = 0; j < 3; j++)
 				if (pole[i][j] == ' ') break;
 			if (pole[i][j] == ' ') break; //нужно, чтобы выйти из цикла по i.
 		}
-		if (i * j == 9)
+		if (i * j == 9) //Если ничья
 		{
 			cout << "GAME OVER\n";
 			exit(0);
 		}
 		else
-			pole[i][j] = 'O';
+			pole[i][j] = 'O';//Компьютер играет за ноль, да, кстати
 	}
 
 
-	char who_is_the_winner(char** pole)
+	char who_is_the_winner(char** pole) //Кто выйграл, а?
 	{
 		int i;
 		for (i = 0; i < 3; i++)
@@ -631,24 +646,24 @@ namespace tictac
 	}
 
 }
-int main()
+int main()//Про сердце. 
 {
 	setlocale(LC_ALL, "");
 	menu::all_menu();
 	int main_num;
 	cin >> main_num;
-	switch (main_num)
+	switch (main_num)//Разделение на 5 кейсов, что выводятся в главном меню
 	{
-	case 1:
+	case 1://Касательно номеров варианта
 	{
 		int var_num;
 		menu::variant_menu();
 		cin >> var_num;
 
-		switch (var_num)
+		switch (var_num)//Разделение между заданиями
 		{
 
-		case 1:
+		case 1://1 задание
 		{
 			int rows, cols, a, b;
 			first_task::show_test_variables();
@@ -668,7 +683,7 @@ int main()
 			delete[] arr;
 			break;
 		}
-		case 2:
+		case 2://2 задание
 		{
 			int m, n, num;//2v
 			second_task::input_size(n, m);
@@ -693,7 +708,7 @@ int main()
 		}
 		break;
 	}
-	case 2:
+	case 2://Состязание по стрельбе
 	{
 		menu::shooters_menu();
 		int n, m = 1;
@@ -701,13 +716,13 @@ int main()
 		cin >> sh_num;
 		switch (sh_num)
 		{
-		case 1:
+		case 1://Ввод рандомных значений
 		{
 			n = rand() % 31;
 			m = rand() % 11;
 			break;
 		}
-		case 2:
+		case 2://ввод вручную
 		{
 			cout << "Enter n and m\n";
 			cin >> n;
@@ -717,14 +732,14 @@ int main()
 		default:
 			break;
 		}
-		srand(time(NULL));
+		srand(time(NULL));//отвечает за стрелков и их выстрелы
 		while (n == 0 || m == 0 || n == 1 || m == 1);
 		cout << "number of shooters:" << n << "\nnumber of shots:" << m << "\n";
 		int** a;
 		a = new int* [n];
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)//объявление одномерного массива
 			a[i] = new int[m];
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)//двумерного
 			for (int j = 0; j < m; j++)
 				a[i][j] = rand() % 11;
 		for (int i = 0; i < n; i++)
@@ -737,11 +752,11 @@ int main()
 		}
 		int* res;
 		res = new int[n];
-		shooters_task::results(a, res, n, m);
+		shooters_task::results(a, res, n, m);//вызов функции из именного пространства
 		shooters_task::winners(res, n);
 		break;
 	}
-	case 3:
+	case 3://метод гаусса
 	{
 		/*
 		Тестовые данные просто для проверки работоспособности:
@@ -758,7 +773,6 @@ int main()
 			36
 			47
 			37
-		Вставлять поочерёдно ну ты поняла ок
 		*/
 
 		float** arr, * y, * x;
@@ -777,20 +791,20 @@ int main()
 
 		break;
 	}
-	case 4:
+	case 4://игра в жизнь
 	{
 		menu::gl_menu();
 		int n, m, gl_num;
 		cin >> gl_num;
 		switch (gl_num)
 		{
-		case 1:
+		case 1://рандомный ввод
 		{
 			n = rand() % 21;
 			m = rand() % 21;
 			break;
 		}
-		case 2:
+		case 2://ручной ввод(лапками)
 		{
 			cout << "Введите n и m";
 			cin >> n;
@@ -799,7 +813,7 @@ int main()
 		default:
 			break;
 		}
-		while (n < 4 || m < 4);
+		while (n < 4 || m < 4);//ввод данных менее 4 не возможен
 		cout << "\nРазмерность Вселенной: " << n << " Строки и " << m << " колонки\n";
 		int** field; //задаем поле (многомерный массив)
 		field = new int* [n];
@@ -822,7 +836,7 @@ int main()
 		for (int i = 0; i < n; i++)
 			PreviousField[i] = new int[m];
 		int livingpoints = -1;
-		bool Edem = false;
+		bool Edem = false; //Проверка на выживших
 		do
 		{
 			game_life_task::fieldView(field, n, m);                                   //показ поля
@@ -838,7 +852,7 @@ int main()
 		} while (livingpoints != 0 || !Edem);
 		return 0;
 	}
-	case 5:
+	case 5://Крестики нолики
 	{
 		char round;
 		round = ' ';
